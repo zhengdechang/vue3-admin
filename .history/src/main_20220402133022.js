@@ -1,0 +1,8 @@
+import { createApp } from "vue";
+import App from "./App.js";
+import router from "./router";
+import store from "./store";
+import 'ant-design-vue/dist/antd.css';
+import '@/assets/css/index.less'
+
+createApp(App).use(store).use(router).mount("#app");
