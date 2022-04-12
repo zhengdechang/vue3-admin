@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "./config";
 import NProgress from 'nprogress';
-import { getToken } from '@/utils/index.js';
-
-import store from '@/store';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -33,7 +30,7 @@ router.beforeEach(async (to, _, next) => {
     if (/^\/login.*/.test(to.path)) {
       if (to.query.from) {
         // 存在登录跳转回页面
-        next(to.query.from);
+        next(to.query.from as string);
       } else {
         next('/');
       }
@@ -42,7 +39,7 @@ router.beforeEach(async (to, _, next) => {
         path: to.path,
         breadcrumbs: to.matched
           .filter((item) => item.meta?.title)
-          .map((item) => item.meta?.title)
+          .map((item: AdminRouteRecordRaw) => item.meta?.title)
       });
 
       document.title = `${to.meta?.title || ''} - 管理系统`;

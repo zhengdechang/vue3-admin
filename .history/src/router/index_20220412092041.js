@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "./config";
 import NProgress from 'nprogress';
-import { getToken } from '@/utils/index.js';
+import { getToken } from '@/utils';
 
 import store from '@/store';
 

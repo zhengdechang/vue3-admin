@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "./config";
 import NProgress from 'nprogress';
-import { getToken } from '@/utils/index.js';
-
-import store from '@/store';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
