@@ -5,7 +5,7 @@ import Final from '@/config/keys';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { Input, Checkbox, Button, message, Spin } from 'ant-design-vue';
 import { onBeforeRouteLeave } from 'vue-router';
-import router from '@/router';
+
 const Login = defineComponent({
     name: 'LongLogin',
     setup() {
@@ -24,7 +24,7 @@ const Login = defineComponent({
         const login = () => {
             if (data.info.username !== '' && data.info.password !== '') {
                 data.spinning = true;
-                data.remembered && localStorage.setItem(Final.TOKEN, "token");
+                payload.remembered && localStorage.setItem(Final.TOKEN, "token");
                 const from = router.currentRoute.value.query.from;
                 router.push(from || '/');
             } else {

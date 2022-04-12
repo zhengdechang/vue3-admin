@@ -1,7 +1,7 @@
 // import { logout, login, getUseInfo, LoginInfoType } from '@/apis/user';
-// import { login, } from '@/apis/user';
+import { login, } from '@/apis/user';
 import Final from '@/config/keys';
-// import router from '@/router';
+import router from '@/router';
 // import { transformRoutes, resetRoutes } from '@/utils/biz';
 
 
@@ -31,23 +31,23 @@ const mutations = {
 };
 
 const actions = {
-  // login(store, payload) {
-  //   return login(payload)
-  //     .then(({ data }) => {
-  //       store.commit('setToken', data);
-  //       return data.token;
-  //     })
-  //     .then((token) => {
-  //       payload.remembered && localStorage.setItem(Final.TOKEN, "token" + token);
-  //     })
-  //     .then(async () => {
-  //       await store.dispatch('getLoginUser');
-  //     })
-  //     .then(() => {
-  //       const from = router.currentRoute.value.query.from;
-  //       router.push(from || '/');
-  //     });
-  // },
+  login(store, payload) {
+    return login(payload)
+      .then(({ data }) => {
+        store.commit('setToken', data);
+        return data.token;
+      })
+      .then((token) => {
+        payload.remembered && localStorage.setItem(Final.TOKEN, "token");
+      })
+      .then(async () => {
+        await store.dispatch('getLoginUser');
+      })
+      .then(() => {
+        const from = router.currentRoute.value.query.from;
+        router.push(from || '/');
+      });
+  },
   // logout(store) {
   //   return logout()
   //     .then(() => {

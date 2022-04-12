@@ -1,11 +1,10 @@
 import { reactive, defineComponent, onMounted } from 'vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 import './index.less';
-import Final from '@/config/keys';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-import { Input, Checkbox, Button, message, Spin } from 'ant-design-vue';
+import { Input, Checkbox, Button, Popconfirm, message, Spin } from 'ant-design-vue';
 import { onBeforeRouteLeave } from 'vue-router';
-import router from '@/router';
+
 const Login = defineComponent({
     name: 'LongLogin',
     setup() {
@@ -19,14 +18,20 @@ const Login = defineComponent({
             spinning: false
         });
 
-        // const store = useStore();
+        const store = useStore();
 
         const login = () => {
             if (data.info.username !== '' && data.info.password !== '') {
                 data.spinning = true;
-                data.remembered && localStorage.setItem(Final.TOKEN, "token");
-                const from = router.currentRoute.value.query.from;
-                router.push(from || '/');
+                store
+                    .dispatch('user/login', {
+                        ...data.info,
+                        remembered: data.remembered
+                    })
+                    .catch((error) => {
+                        data.spinning = false;
+                        message.error(error?.msg || '登录失败，请联系管理员');
+                    });
             } else {
                 message.error('登录信息不能为空！');
             }
@@ -37,9 +42,6 @@ const Login = defineComponent({
                 login();
             }
         };
-        const forgetPaw = () => {
-            message.warning('暂时无此功能')
-        }
 
         onMounted(() => {
             document.addEventListener('keyup', keyUpHandler);
@@ -55,8 +57,8 @@ const Login = defineComponent({
                 <Spin spinning={data.spinning}>
                     <div class="login-container">
                         <div class="login-form">
-                            <h1 class="form-title">Vue3-管理系统</h1>
-                            <p class="text-help">登录Vue3-管理系统</p>
+                            <h1 class="form-title">Vue3-admin</h1>
+                            <p class="text-help">这里不知道写点什么，多几个文字比较好看吧</p>
                             <div class="form-item">
                                 <Input
                                     size="large"
@@ -91,12 +93,7 @@ const Login = defineComponent({
                                 >
                                     记住我
                                 </Checkbox>
-                                <span
-                                    class="forget-p-help cper"
-                                    onClick={forgetPaw}
-                                >
-                                    忘记密码？
-                                </span>
+                                <span class="forget-p-help cper">忘记密码？</span
                             </div>
                             <div class="form-item">
                                 <Button type="primary" onClick={login} style="width: 100%" size="large">

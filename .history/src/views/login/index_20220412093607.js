@@ -1,11 +1,10 @@
 import { reactive, defineComponent, onMounted } from 'vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 import './index.less';
-import Final from '@/config/keys';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { Input, Checkbox, Button, message, Spin } from 'ant-design-vue';
 import { onBeforeRouteLeave } from 'vue-router';
-import router from '@/router';
+
 const Login = defineComponent({
     name: 'LongLogin',
     setup() {
@@ -19,14 +18,20 @@ const Login = defineComponent({
             spinning: false
         });
 
-        // const store = useStore();
+        const store = useStore();
 
         const login = () => {
             if (data.info.username !== '' && data.info.password !== '') {
                 data.spinning = true;
-                data.remembered && localStorage.setItem(Final.TOKEN, "token");
-                const from = router.currentRoute.value.query.from;
-                router.push(from || '/');
+                store
+                    .dispatch('user/login', {
+                        ...data.info,
+                        remembered: data.remembered
+                    })
+                    .catch((error) => {
+                        data.spinning = false;
+                        message.error(error?.msg || '登录失败，请联系管理员');
+                    });
             } else {
                 message.error('登录信息不能为空！');
             }

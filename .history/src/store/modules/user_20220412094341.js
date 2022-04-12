@@ -1,7 +1,7 @@
 // import { logout, login, getUseInfo, LoginInfoType } from '@/apis/user';
-// import { login, } from '@/apis/user';
+import { login, } from '@/apis/user';
 import Final from '@/config/keys';
-// import router from '@/router';
+import router from '@/router';
 // import { transformRoutes, resetRoutes } from '@/utils/biz';
 
 
@@ -24,6 +24,11 @@ const mutations = {
     state.token = '';
     state.info = initInfo;
     localStorage.removeItem(Final.TOKEN);
+  },
+  login(state, payload) {
+    payload.remembered && localStorage.setItem(Final.TOKEN, "token");
+    const from = router.currentRoute.value.query.from;
+    router.push(from || '/');
   },
   setUserInfo(state, payload) {
     state.info = payload.info;
