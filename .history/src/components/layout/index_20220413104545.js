@@ -7,7 +7,7 @@ import LogoImg from '@/assets/logo.png';
 import './index.less';
 import Menu from './Menu';
 import Setting from './Setting';
-// import RouteBar from './RouteBar';
+import RouteBar from './RouteBar';
 import NavBar from './NavBar';
 
 const Home = defineComponent({

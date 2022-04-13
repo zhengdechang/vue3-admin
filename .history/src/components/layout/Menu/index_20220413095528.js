@@ -3,11 +3,13 @@ import { useStore } from 'vuex';
 import { Menu } from 'ant-design-vue';
 import { RouterLink } from 'vue-router';
 import { routes } from "@/router/config";
-import { VueIcon } from '@/components/vueIcon';
+// import * as Icon from '@ant-design/icons-vue';
 
 const menuItemRender = (menu) => {
-  return <Menu.Item key={menu.path} icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}>
+  return <Menu.Item key={menu.path}>
     <RouterLink to={menu.path}>
+      {/* {menu.meta.icon && <menu.meta.icon />} */}
+      {/* {menu.icon && h(Icon[menu.icon])} */}
       {menu.meta?.title}
     </RouterLink>
   </Menu.Item>
@@ -17,27 +19,36 @@ const menuChildRender = (menuList) => {
   return menuList?.map((menu) => {
     return (
       <>
-        {menu.children?.length > 0 ? (
+        {menu?.children?.length > 1 ? (
           <Menu.SubMenu
             key={menu.path}
-            title={menu.meta.title}
-            icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
+            title={
+              <>
+                <span>{menu.title}</span>
+              </>
+            }
           >
-            {menu.children.map((menuChild) => {
-              return <>
-                {!menuChild?.children ? (
+            {menu?.children.map((menuChild) => (
+              <>
+                {menuChild.children.length === 0 ? (
                   menuItemRender(menuChild)
                 ) : (
                   <Menu.SubMenu
                     key={menuChild.path}
-                    icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
-                    title={menuChild.meta.title}
+                    icon={menu.meta.icon && <menu.meta.icon />}
+                    title={
+                      <>
+                        {menuChild.meta.icon && <menuChild.meta.icon />}
+                        {/* {menuChild.icon && h(Icon[menuChild.icon])} */}
+                        <span>{menuChild.title}</span>
+                      </>
+                    }
                   >
                     {menuChildRender(menuChild.children)}
                   </Menu.SubMenu>
                 )}
               </>
-            })}
+            ))}
           </Menu.SubMenu>
         ) : (
           menuItemRender(menu?.children?.[0] || menu)

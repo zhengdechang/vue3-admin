@@ -3,10 +3,10 @@ import { useStore } from 'vuex';
 import { Menu } from 'ant-design-vue';
 import { RouterLink } from 'vue-router';
 import { routes } from "@/router/config";
-import { VueIcon } from '@/components/vueIcon';
+// import * as Icon from '@ant-design/icons-vue';
 
 const menuItemRender = (menu) => {
-  return <Menu.Item key={menu.path} icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}>
+  return <Menu.Item key={menu.path}>
     <RouterLink to={menu.path}>
       {menu.meta?.title}
     </RouterLink>
@@ -21,7 +21,7 @@ const menuChildRender = (menuList) => {
           <Menu.SubMenu
             key={menu.path}
             title={menu.meta.title}
-            icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
+            icon={menu.meta.icon && <CodeOutlined />}
           >
             {menu.children.map((menuChild) => {
               return <>
@@ -30,7 +30,7 @@ const menuChildRender = (menuList) => {
                 ) : (
                   <Menu.SubMenu
                     key={menuChild.path}
-                    icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
+                    icon={menu.meta.icon && <menu.meta.icon />}
                     title={menuChild.meta.title}
                   >
                     {menuChildRender(menuChild.children)}

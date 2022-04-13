@@ -14,7 +14,7 @@ export const routes = [
             {
                 path: "/",
                 name: "config",
-                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('empty'),
+                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('home'),
                 children: [
                     {
                         path: "home",
@@ -34,7 +34,6 @@ export const routes = [
         path: '/login',
         name: 'Login',
         meta: { title: '登录' },
-        component: getCom('login'),
-
+        component: getCom('login')
     },
 ];

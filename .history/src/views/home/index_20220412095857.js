@@ -2,14 +2,15 @@ import { defineComponent } from 'vue';
 
 import './index.less';
 
-const Home = defineComponent({
+const Layout = defineComponent({
     setup() {
         return () => (
             <div class="home">
-                asdsa
+                123
+                <router-view></router-view>
             </div>
         );
     }
 });
 
-export default Home;
+export default Layout;

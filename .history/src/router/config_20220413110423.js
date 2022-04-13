@@ -9,12 +9,12 @@ const getCom = (path, base) => {
 export const routes = [
     {
         path: "/", name: "Home", component: getCom('layout', 'components'),
-        redirect: '/',
+        // redirect: '/',
         children: [
             {
                 path: "/",
                 name: "config",
-                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('empty'),
+                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('aa'),
                 children: [
                     {
                         path: "home",

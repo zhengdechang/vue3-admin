@@ -61,7 +61,7 @@ const Home = defineComponent({
                             {({ Component }) => {
                                 return (
                                     <KeepAlive include={store.state.setting.cacheList}>
-                                        <Component />
+                                        {/* <Component /> */}
                                     </KeepAlive>
                                 );
                             }}

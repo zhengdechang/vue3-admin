@@ -9,17 +9,17 @@ const getCom = (path, base) => {
 export const routes = [
     {
         path: "/", name: "Home", component: getCom('layout', 'components'),
-        redirect: '/',
+        redirect: '/home',
         children: [
             {
-                path: "/",
-                name: "config",
-                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('empty'),
+                path: "config",
+                name: "Home",
+                meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('home'),
                 children: [
                     {
                         path: "home",
                         name: "home",
-                        meta: { title: '首页', icon: 'CodeOutlined' }, component: getCom('home'),
+                        meta: { title: '1', icon: 'CodeOutlined' }, component: getCom('home'),
                     },
                     {
                         path: "System",
@@ -34,7 +34,6 @@ export const routes = [
         path: '/login',
         name: 'Login',
         meta: { title: '登录' },
-        component: getCom('login'),
-
+        component: getCom('login')
     },
 ];

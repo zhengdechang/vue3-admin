@@ -58,13 +58,13 @@ const Home = defineComponent({
                     {/* <RouteBar /> */}
                     <main class="layout-main">
                         <RouterView>
-                            {({ Component }) => {
+                            {/* {({ Component }) => {
                                 return (
                                     <KeepAlive include={store.state.setting.cacheList}>
-                                        <Component />
+                                        {/* <Component /> */}
                                     </KeepAlive>
                                 );
-                            }}
+                            }} */}
                         </RouterView>
                     </main>
                 </div>
@@ -76,7 +76,7 @@ const Home = defineComponent({
                         }}
                     />
                 </div>
-            </section>
+            </section >
         );
     }
 });

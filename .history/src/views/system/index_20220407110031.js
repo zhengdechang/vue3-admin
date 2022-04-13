@@ -2,14 +2,14 @@ import { defineComponent } from 'vue';
 
 import './index.less';
 
-const Home = defineComponent({
+const Systems = defineComponent({
     setup() {
         return () => (
-            <div class="home">
-                asdsa
+            <div class="system">
+                1111
             </div>
         );
     }
 });
 
-export default Home;
+export default Systems;

@@ -12,7 +12,7 @@ export const routes = [
         redirect: '/',
         children: [
             {
-                path: "/",
+                path: "/config",
                 name: "config",
                 meta: { title: '配置', icon: 'CodeOutlined' }, component: getCom('empty'),
                 children: [

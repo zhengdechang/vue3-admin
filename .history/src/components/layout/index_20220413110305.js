@@ -1,4 +1,4 @@
-import { computed, defineComponent, KeepAlive, reactive } from 'vue';
+import { computed, defineComponent, reactive } from 'vue';
 import { RouterView } from 'vue-router';
 import { useStore } from 'vuex';
 import './index.less';
@@ -58,13 +58,13 @@ const Home = defineComponent({
                     {/* <RouteBar /> */}
                     <main class="layout-main">
                         <RouterView>
-                            {({ Component }) => {
+                            {/* {({ Component }) => {
                                 return (
                                     <KeepAlive include={store.state.setting.cacheList}>
                                         <Component />
                                     </KeepAlive>
                                 );
-                            }}
+                            }} */}
                         </RouterView>
                     </main>
                 </div>

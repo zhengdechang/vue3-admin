@@ -58,7 +58,7 @@ export default defineComponent({
         mode="inline"
         inlineCollapsed={aside.value}
         // class="skin-dark"
-        theme={store.state.setting.theme === 'light' ? 'light' : 'dark'}
+        theme={'light'}
         selectedKeys={store.state.setting.selectedKeys}
         openKeys={store.state.setting.openKeys}
       // background-color="#1d1e23"

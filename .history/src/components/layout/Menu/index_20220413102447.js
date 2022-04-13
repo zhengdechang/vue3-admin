@@ -6,7 +6,7 @@ import { routes } from "@/router/config";
 import { VueIcon } from '@/components/vueIcon';
 
 const menuItemRender = (menu) => {
-  return <Menu.Item key={menu.path} icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}>
+  return <Menu.Item key={menu.path}>
     <RouterLink to={menu.path}>
       {menu.meta?.title}
     </RouterLink>
@@ -30,7 +30,7 @@ const menuChildRender = (menuList) => {
                 ) : (
                   <Menu.SubMenu
                     key={menuChild.path}
-                    icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
+                    icon={menu.meta.icon && <menu.meta.icon />}
                     title={menuChild.meta.title}
                   >
                     {menuChildRender(menuChild.children)}

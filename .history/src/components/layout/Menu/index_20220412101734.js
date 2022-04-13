@@ -1,46 +1,64 @@
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, h } from 'vue';
 import { useStore } from 'vuex';
 import { Menu } from 'ant-design-vue';
 import { RouterLink } from 'vue-router';
-import { routes } from "@/router/config";
-import { VueIcon } from '@/components/vueIcon';
+
+import * as Icon from '@ant-design/icons-vue';
 
 const menuItemRender = (menu) => {
-  return <Menu.Item key={menu.path} icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}>
-    <RouterLink to={menu.path}>
-      {menu.meta?.title}
-    </RouterLink>
-  </Menu.Item>
+  return menu.outLink ? (
+    <li key={`__outlink-${menu.path}`} class="ant-menu-item" style="padding-left: 24px;">
+      <a href={menu.outLink} target="_blank">
+        {menu.icon && h(Icon[menu.icon])}
+        <span>{menu.title}</span>
+      </a>
+    </li>
+  ) : (
+    <Menu.Item key={menu.path}>
+      <RouterLink to={menu.path}>
+        {menu.icon && h(Icon[menu.icon])}
+        <span>{menu.title}</span>
+      </RouterLink>
+    </Menu.Item>
+  );
 };
 
 const menuChildRender = (menuList) => {
-  return menuList?.map((menu) => {
+  return menuList.map((menu) => {
     return (
       <>
-        {menu.children?.length > 0 ? (
+        {menu.children.length > 1 ? (
           <Menu.SubMenu
             key={menu.path}
-            title={menu.meta.title}
-            icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
+            title={
+              <>
+                {menu.icon && h(Icon[menu.icon])}
+                <span>{menu.title}</span>
+              </>
+            }
           >
-            {menu.children.map((menuChild) => {
-              return <>
-                {!menuChild?.children ? (
+            {menu.children.map((menuChild) => (
+              <>
+                {menuChild.children.length === 0 ? (
                   menuItemRender(menuChild)
                 ) : (
                   <Menu.SubMenu
                     key={menuChild.path}
-                    icon={menu.meta.icon && <VueIcon icon={menu.meta.icon} />}
-                    title={menuChild.meta.title}
+                    title={
+                      <>
+                        {menuChild.icon && h(Icon[menuChild.icon])}
+                        <span>{menuChild.title}</span>
+                      </>
+                    }
                   >
                     {menuChildRender(menuChild.children)}
                   </Menu.SubMenu>
                 )}
               </>
-            })}
+            ))}
           </Menu.SubMenu>
         ) : (
-          menuItemRender(menu?.children?.[0] || menu)
+          menuItemRender(menu.children[0] || menu)
         )}
       </>
     );
@@ -65,7 +83,7 @@ export default defineComponent({
       // text-color="#eee"
       // collapse-transition={false}
       >
-        {menuChildRender(routes[0]?.children)}
+        {menuChildRender(store.state.menu.menuList)}
       </Menu>
     );
   }

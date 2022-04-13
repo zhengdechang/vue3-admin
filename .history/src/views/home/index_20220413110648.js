@@ -6,7 +6,7 @@ const Home = defineComponent({
     setup() {
         return () => (
             <div class="home">
-                asdsa
+
             </div>
         );
     }
