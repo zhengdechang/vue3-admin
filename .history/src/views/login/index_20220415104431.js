@@ -6,9 +6,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { Input, Checkbox, Button, message, Spin } from 'ant-design-vue';
 import { onBeforeRouteLeave } from 'vue-router';
 import router from '@/router';
-import { useStore } from 'vuex';
-
-
 const Login = defineComponent({
     name: 'LongLogin',
     setup() {
@@ -22,13 +19,12 @@ const Login = defineComponent({
             spinning: false
         });
 
-        const store = useStore();
+        // const store = useStore();
 
         const login = () => {
             if (data.info.username !== '' && data.info.password !== '') {
                 data.spinning = true;
-                store.commit('user/setUserInfo', data);
-                localStorage.setItem('username', data.info.username)
+                sessionStorage.setItem('userInfo', data.info)
                 data.remembered && localStorage.setItem(Final.TOKEN, "token");
                 const from = router.currentRoute.value.query.from;
                 router.push(from || '/');

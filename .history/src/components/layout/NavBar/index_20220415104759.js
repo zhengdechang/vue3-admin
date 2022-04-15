@@ -1,16 +1,16 @@
-import { defineComponent, reactive, onMounted } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 import screenfull from 'screenfull';
 import { DEMO_USER_HEAD } from '@/config/urls';
-import router from '@/router';
+
 import {
   Breadcrumb,
   message,
   Avatar,
   Dropdown,
   Menu,
-  // notification
+  notification
 } from 'ant-design-vue';
 import {
   MenuFoldOutlined,
@@ -45,31 +45,14 @@ export default defineComponent({
       // 全屏状态
       isFullscreen: false,
       // 通知内容显示
-      bellContent: false,
+      bellContent: false
     });
-    const userInfo = reactive({
-      username: '',
-      avatar: ''
-    });
-
-
-    const getUserInfo = () => {
-      userInfo.username = store.state.user.info?.username
-      userInfo.avatar = store.state.user.info?.avatar
-      console.log(userInfo, store.state.user.info?.username, '111')
-    }
-
-    onMounted(() => {
-      getUserInfo()
-    })
 
     const adjustMenu = () => {
       store.commit('setting/asideState', {
         aside: store.state.setting.aside === 'open' ? 'close' : 'open'
       });
     };
-
-
 
     // 调整主题
     // const adjustTheme = ({ key }) => {
@@ -90,15 +73,12 @@ export default defineComponent({
 
     // 退出登录
     const logout = () => {
-      // store.dispatch('user/logout').catch((error) => {
-      //   notification.error({
-      //     message: '操作失败！',
-      //     description: error?.msg || '未知的异常！'
-      //   });
-      // });
-      localStorage.removeItem('TOKEN')
-      router.push('/login');
-      console.log(configData, store.state.user.info, '1')
+      store.dispatch('user/logout').catch((error) => {
+        notification.error({
+          message: '操作失败！',
+          description: error?.msg || '未知的异常！'
+        });
+      });
     };
 
     if (screenfull.isEnabled) {
@@ -106,8 +86,6 @@ export default defineComponent({
         configData.isFullscreen = !configData.isFullscreen;
       });
     }
-
-
 
     return () => (
       <div class="layout-bar">
@@ -192,7 +170,7 @@ export default defineComponent({
           >
             <li>
               <Avatar size="small" src={DEMO_USER_HEAD} />
-              <span style={{ marginLeft: '2px' }}>{userInfo.username}</span>
+              111
             </li>
           </Dropdown>
         </ul>

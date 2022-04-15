@@ -1,9 +1,9 @@
-import { defineComponent, reactive, onMounted } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 import screenfull from 'screenfull';
 import { DEMO_USER_HEAD } from '@/config/urls';
-import router from '@/router';
+
 import {
   Breadcrumb,
   message,
@@ -46,21 +46,11 @@ export default defineComponent({
       isFullscreen: false,
       // 通知内容显示
       bellContent: false,
+      userInfo: {},
     });
-    const userInfo = reactive({
-      username: '',
-      avatar: ''
-    });
-
-
-    const getUserInfo = () => {
-      userInfo.username = store.state.user.info?.username
-      userInfo.avatar = store.state.user.info?.avatar
-      console.log(userInfo, store.state.user.info?.username, '111')
-    }
 
     onMounted(() => {
-      getUserInfo()
+      userInfo.userInfo = store.state.user.Info
     })
 
     const adjustMenu = () => {
@@ -96,9 +86,8 @@ export default defineComponent({
       //     description: error?.msg || '未知的异常！'
       //   });
       // });
-      localStorage.removeItem('TOKEN')
-      router.push('/login');
-      console.log(configData, store.state.user.info, '1')
+
+      console.log(store.state.user.info, '1')
     };
 
     if (screenfull.isEnabled) {
@@ -192,7 +181,7 @@ export default defineComponent({
           >
             <li>
               <Avatar size="small" src={DEMO_USER_HEAD} />
-              <span style={{ marginLeft: '2px' }}>{userInfo.username}</span>
+              111
             </li>
           </Dropdown>
         </ul>

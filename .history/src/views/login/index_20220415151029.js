@@ -28,7 +28,7 @@ const Login = defineComponent({
             if (data.info.username !== '' && data.info.password !== '') {
                 data.spinning = true;
                 store.commit('user/setUserInfo', data);
-                localStorage.setItem('username', data.info.username)
+                localStorage.setItem('userName', data.info.username)
                 data.remembered && localStorage.setItem(Final.TOKEN, "token");
                 const from = router.currentRoute.value.query.from;
                 router.push(from || '/');

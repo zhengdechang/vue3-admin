@@ -192,7 +192,7 @@ export default defineComponent({
           >
             <li>
               <Avatar size="small" src={DEMO_USER_HEAD} />
-              <span style={{ marginLeft: '2px' }}>{userInfo.username}</span>
+              {userInfo.username}
             </li>
           </Dropdown>
         </ul>

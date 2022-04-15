@@ -28,7 +28,7 @@ router.beforeEach(async (to, _, next) => {
     //   // 获取用户信息
     //   await store.dispatch('user/getLoginUser');
     // }
-    store.commit('user/setUserInfo', { info: { username: localStorage.getItem('username') } });
+    store.commit('user/setUserInfo', { username: localStorage.getItem('userName') });
     // 有token时，前往登录页
     if (/^\/login.*/.test(to.path)) {
       if (to.query.from) {

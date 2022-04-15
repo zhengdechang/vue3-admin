@@ -47,16 +47,15 @@ export default defineComponent({
       // 通知内容显示
       bellContent: false,
     });
-    const userInfo = reactive({
+    let userInfo = reactive({
       username: '',
       avatar: ''
     });
 
 
     const getUserInfo = () => {
-      userInfo.username = store.state.user.info?.username
-      userInfo.avatar = store.state.user.info?.avatar
-      console.log(userInfo, store.state.user.info?.username, '111')
+      // userInfo?.username = store.state.user.info?.username
+      // userInfo?.avatar = store.state.user.info?.avatar
     }
 
     onMounted(() => {
@@ -192,7 +191,7 @@ export default defineComponent({
           >
             <li>
               <Avatar size="small" src={DEMO_USER_HEAD} />
-              <span style={{ marginLeft: '2px' }}>{userInfo.username}</span>
+              111
             </li>
           </Dropdown>
         </ul>
