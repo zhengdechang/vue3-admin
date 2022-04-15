@@ -45,7 +45,7 @@ router.beforeEach(async (to, _, next) => {
           .map((item) => item.meta?.title)
       });
 
-      document.title = `Vue3 - 管理系统`;
+      document.title = `${to.meta?.title || ''} - 管理系统`;
       next();
     }
   } else {
